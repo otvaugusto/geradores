@@ -1,0 +1,544 @@
+Terminals unused in grammar
+
+   TKN_MAS
+   TKN_MULT
+
+
+State 5 conflicts: 1 shift/reduce
+State 28 conflicts: 6 shift/reduce
+State 29 conflicts: 4 shift/reduce
+State 30 conflicts: 6 shift/reduce
+State 31 conflicts: 4 shift/reduce
+State 32 conflicts: 6 shift/reduce
+
+
+Grammar
+
+    0 $accept: calc $end
+
+    1 $@1: %empty
+
+    2 calc: TKN_ID $@1 TKN_ATRIB expr TKN_PTOVIRGULA
+    3     | calc calc
+
+    4 expr: TKN_NUM
+    5     | expr TKN_MAIS expr
+    6     | expr TKN_MENOS expr
+    7     | expr TKN_MULTI expr
+    8     | expr TKN_DIV expr
+    9     | expr TKN_POTENCIA expr
+   10     | expr TKN_FAT
+   11     | TKN_PAA expr TKN_PAF
+   12     | TKN_RAIZ TKN_PAA expr TKN_PAF
+   13     | TKN_COS TKN_PAA expr TKN_PAF
+   14     | TKN_SEN TKN_PAA expr TKN_PAF
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+TKN_NUM (258) 4
+TKN_ATRIB (259) 2
+TKN_PTOVIRGULA (260) 2
+TKN_MULTI (261) 7
+TKN_DIV (262) 8
+TKN_MAIS (263) 5
+TKN_MENOS (264) 6
+TKN_PAA (265) 11 12 13 14
+TKN_PAF (266) 11 12 13 14
+TKN_COS (267) 13
+TKN_SEN (268) 14
+TKN_POTENCIA (269) 9
+TKN_RAIZ (270) 12
+TKN_FAT (271) 10
+TKN_ID (272) 2
+TKN_MAS (273)
+TKN_MULT (274)
+
+
+Nonterminals, with rules where they appear
+
+$accept (20)
+    on left: 0
+calc (21)
+    on left: 2 3, on right: 0 3
+$@1 (22)
+    on left: 1, on right: 2
+expr (23)
+    on left: 4 5 6 7 8 9 10 11 12 13 14, on right: 2 5 6 7 8 9 10 11
+    12 13 14
+
+
+State 0
+
+    0 $accept: . calc $end
+
+    TKN_ID  shift, and go to state 1
+
+    calc  go to state 2
+
+
+State 1
+
+    2 calc: TKN_ID . $@1 TKN_ATRIB expr TKN_PTOVIRGULA
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 3
+
+
+State 2
+
+    0 $accept: calc . $end
+    3 calc: calc . calc
+
+    $end    shift, and go to state 4
+    TKN_ID  shift, and go to state 1
+
+    calc  go to state 5
+
+
+State 3
+
+    2 calc: TKN_ID $@1 . TKN_ATRIB expr TKN_PTOVIRGULA
+
+    TKN_ATRIB  shift, and go to state 6
+
+
+State 4
+
+    0 $accept: calc $end .
+
+    $default  accept
+
+
+State 5
+
+    3 calc: calc . calc
+    3     | calc calc .
+
+    TKN_ID  shift, and go to state 1
+
+    TKN_ID    [reduce using rule 3 (calc)]
+    $default  reduce using rule 3 (calc)
+
+    calc  go to state 5
+
+
+State 6
+
+    2 calc: TKN_ID $@1 TKN_ATRIB . expr TKN_PTOVIRGULA
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 12
+
+
+State 7
+
+    4 expr: TKN_NUM .
+
+    $default  reduce using rule 4 (expr)
+
+
+State 8
+
+   11 expr: TKN_PAA . expr TKN_PAF
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 13
+
+
+State 9
+
+   13 expr: TKN_COS . TKN_PAA expr TKN_PAF
+
+    TKN_PAA  shift, and go to state 14
+
+
+State 10
+
+   14 expr: TKN_SEN . TKN_PAA expr TKN_PAF
+
+    TKN_PAA  shift, and go to state 15
+
+
+State 11
+
+   12 expr: TKN_RAIZ . TKN_PAA expr TKN_PAF
+
+    TKN_PAA  shift, and go to state 16
+
+
+State 12
+
+    2 calc: TKN_ID $@1 TKN_ATRIB expr . TKN_PTOVIRGULA
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+
+    TKN_PTOVIRGULA  shift, and go to state 17
+    TKN_MULTI       shift, and go to state 18
+    TKN_DIV         shift, and go to state 19
+    TKN_MAIS        shift, and go to state 20
+    TKN_MENOS       shift, and go to state 21
+    TKN_POTENCIA    shift, and go to state 22
+    TKN_FAT         shift, and go to state 23
+
+
+State 13
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+   11     | TKN_PAA expr . TKN_PAF
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_PAF       shift, and go to state 24
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+
+State 14
+
+   13 expr: TKN_COS TKN_PAA . expr TKN_PAF
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 25
+
+
+State 15
+
+   14 expr: TKN_SEN TKN_PAA . expr TKN_PAF
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 26
+
+
+State 16
+
+   12 expr: TKN_RAIZ TKN_PAA . expr TKN_PAF
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 27
+
+
+State 17
+
+    2 calc: TKN_ID $@1 TKN_ATRIB expr TKN_PTOVIRGULA .
+
+    $default  reduce using rule 2 (calc)
+
+
+State 18
+
+    7 expr: expr TKN_MULTI . expr
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 28
+
+
+State 19
+
+    8 expr: expr TKN_DIV . expr
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 29
+
+
+State 20
+
+    5 expr: expr TKN_MAIS . expr
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 30
+
+
+State 21
+
+    6 expr: expr TKN_MENOS . expr
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 31
+
+
+State 22
+
+    9 expr: expr TKN_POTENCIA . expr
+
+    TKN_NUM   shift, and go to state 7
+    TKN_PAA   shift, and go to state 8
+    TKN_COS   shift, and go to state 9
+    TKN_SEN   shift, and go to state 10
+    TKN_RAIZ  shift, and go to state 11
+
+    expr  go to state 32
+
+
+State 23
+
+   10 expr: expr TKN_FAT .
+
+    $default  reduce using rule 10 (expr)
+
+
+State 24
+
+   11 expr: TKN_PAA expr TKN_PAF .
+
+    $default  reduce using rule 11 (expr)
+
+
+State 25
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+   13     | TKN_COS TKN_PAA expr . TKN_PAF
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_PAF       shift, and go to state 33
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+
+State 26
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+   14     | TKN_SEN TKN_PAA expr . TKN_PAF
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_PAF       shift, and go to state 34
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+
+State 27
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+   12     | TKN_RAIZ TKN_PAA expr . TKN_PAF
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_PAF       shift, and go to state 35
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+
+State 28
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    7     | expr TKN_MULTI expr .
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+    TKN_MULTI     [reduce using rule 7 (expr)]
+    TKN_DIV       [reduce using rule 7 (expr)]
+    TKN_MAIS      [reduce using rule 7 (expr)]
+    TKN_MENOS     [reduce using rule 7 (expr)]
+    TKN_POTENCIA  [reduce using rule 7 (expr)]
+    TKN_FAT       [reduce using rule 7 (expr)]
+    $default      reduce using rule 7 (expr)
+
+
+State 29
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    8     | expr TKN_DIV expr .
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_MAIS      shift, and go to state 20
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+    TKN_MULTI     [reduce using rule 8 (expr)]
+    TKN_MAIS      [reduce using rule 8 (expr)]
+    TKN_POTENCIA  [reduce using rule 8 (expr)]
+    TKN_FAT       [reduce using rule 8 (expr)]
+    $default      reduce using rule 8 (expr)
+
+
+State 30
+
+    5 expr: expr . TKN_MAIS expr
+    5     | expr TKN_MAIS expr .
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+    TKN_MULTI     [reduce using rule 5 (expr)]
+    TKN_DIV       [reduce using rule 5 (expr)]
+    TKN_MAIS      [reduce using rule 5 (expr)]
+    TKN_MENOS     [reduce using rule 5 (expr)]
+    TKN_POTENCIA  [reduce using rule 5 (expr)]
+    TKN_FAT       [reduce using rule 5 (expr)]
+    $default      reduce using rule 5 (expr)
+
+
+State 31
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    6     | expr TKN_MENOS expr .
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+   10     | expr . TKN_FAT
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+    TKN_MULTI     [reduce using rule 6 (expr)]
+    TKN_MAIS      [reduce using rule 6 (expr)]
+    TKN_POTENCIA  [reduce using rule 6 (expr)]
+    TKN_FAT       [reduce using rule 6 (expr)]
+    $default      reduce using rule 6 (expr)
+
+
+State 32
+
+    5 expr: expr . TKN_MAIS expr
+    6     | expr . TKN_MENOS expr
+    7     | expr . TKN_MULTI expr
+    8     | expr . TKN_DIV expr
+    9     | expr . TKN_POTENCIA expr
+    9     | expr TKN_POTENCIA expr .
+   10     | expr . TKN_FAT
+
+    TKN_MULTI     shift, and go to state 18
+    TKN_DIV       shift, and go to state 19
+    TKN_MAIS      shift, and go to state 20
+    TKN_MENOS     shift, and go to state 21
+    TKN_POTENCIA  shift, and go to state 22
+    TKN_FAT       shift, and go to state 23
+
+    TKN_MULTI     [reduce using rule 9 (expr)]
+    TKN_DIV       [reduce using rule 9 (expr)]
+    TKN_MAIS      [reduce using rule 9 (expr)]
+    TKN_MENOS     [reduce using rule 9 (expr)]
+    TKN_POTENCIA  [reduce using rule 9 (expr)]
+    TKN_FAT       [reduce using rule 9 (expr)]
+    $default      reduce using rule 9 (expr)
+
+
+State 33
+
+   13 expr: TKN_COS TKN_PAA expr TKN_PAF .
+
+    $default  reduce using rule 13 (expr)
+
+
+State 34
+
+   14 expr: TKN_SEN TKN_PAA expr TKN_PAF .
+
+    $default  reduce using rule 14 (expr)
+
+
+State 35
+
+   12 expr: TKN_RAIZ TKN_PAA expr TKN_PAF .
+
+    $default  reduce using rule 12 (expr)
